@@ -25,6 +25,12 @@ jobs:
         env:
           TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
         run: python fetch_data.py
+        
+      - name: Test push auth
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          curl -H "Authorization: token ${GH_PAT}" https://api.github.com/user
 
       - name: Commit updated data
         env:
