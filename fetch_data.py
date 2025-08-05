@@ -19,6 +19,9 @@ params = {
 response = requests.get(url, params=params)
 data = response.json()
 
+# Dodaj to przed zapisaniem pliku
+os.makedirs("data", exist_ok=True)
+
 # Zapisz dane do CSV
 with open(OUTPUT_FILE, "w", newline="") as f:
     writer = csv.writer(f)
