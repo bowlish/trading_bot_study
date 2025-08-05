@@ -1,0 +1,35 @@
+name: Fetch ETF Data Hourly
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Co godzinę
+  workflow_dispatch:      # Możliwość ręcznego uruchomienia
+
+jobs:
+  fetch-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch ETF data from Twelve Data
+        env:
+          TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
+        run: python fetch_data.py
+
+      - name: Commit updated data
+        run: |
+          git config --global user.name "GitHub Bot"
+          git config --global user.email "bot@github.com"
+          git add data/spy_data.csv
+          git commit -m "Update ETF data [auto]" || echo "No changes"
+          git push
