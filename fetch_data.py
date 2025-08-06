@@ -5,7 +5,7 @@ from datetime import datetime
 
 API_KEY = os.getenv("TWELVE_DATA_API_KEY")
 SYMBOL = "SPY"
-INTERVAL = "1h"
+INTERVAL = "1m"
 OUTPUT_FILE = "data/spy_data.csv"
 
 url = f"https://api.twelvedata.com/time_series"
@@ -25,6 +25,8 @@ os.makedirs("data", exist_ok=True)
 with open(OUTPUT_FILE, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["datetime", "open", "high", "low", "close", "volume"])
+    print(data)  # <--- dodaj to!
+
     for entry in data["values"]:
         writer.writerow([
             entry["datetime"],
