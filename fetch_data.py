@@ -5,14 +5,20 @@ from datetime import datetime
 
 API_KEY = os.getenv("TWELVE_DATA_API_KEY")
 SYMBOL = "SPY"
+TYPE = "ETF"
 INTERVAL = "1min"
 OUTPUT_FILE = "data/spy_data.csv"
+START_DATE = "2024-01-01 00:00:00"
+END_DATE = datetime.now()
 
 url = f"https://api.twelvedata.com/time_series"
 params = {
     "symbol": SYMBOL,
+    "type": TYPE,
     "interval": INTERVAL,
     "apikey": API_KEY,
+    "start_date": START_DATE,
+    "end_date": END_DATE
 }
 
 response = requests.get(url, params=params)
