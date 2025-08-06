@@ -2,7 +2,10 @@ name: Fetch ETF Data Hourly
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Co godzinę
+    # Co minutę od 13:30 do 20:15 UTC (czyli 9:30–16:15 EST)
+    - cron: '*/1 13-20 * * 1-5'
+    # Co godzinę przez całą dobę
+    - cron: '0 * * * *'
   workflow_dispatch:      # Możliwość ręcznego uruchomienia
 
 jobs:
