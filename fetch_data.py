@@ -5,7 +5,7 @@ from datetime import datetime
 
 API_KEY = os.getenv("TWELVE_DATA_API_KEY")
 SYMBOL = "SPY"
-INTERVAL = "1m"
+INTERVAL = "1min"
 OUTPUT_FILE = "data/spy_data.csv"
 
 url = f"https://api.twelvedata.com/time_series"
